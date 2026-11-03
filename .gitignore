@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+maps/
+*.egg-info/
+dist/
+build/
+media/_frames/
+*.webm
+MUJOCO_LOG.TXT

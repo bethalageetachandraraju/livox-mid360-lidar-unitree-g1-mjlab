@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "livox-mid360-mjlab"
+version = "0.1.0"
+description = "Livox Mid-360 LiDAR for the Unitree G1 in mjlab: real scan pattern, timing, noise and built-in IMU."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "bethalageetachandraraju" }]
+requires-python = ">=3.10,<3.14"
+keywords = ["lidar", "livox", "mid-360", "unitree", "g1", "mjlab", "mujoco", "simulation"]
+dependencies = [
+  "mjlab",
+  "mujoco-lidar>=0.3.5",
+  "torch>=2.7.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.uv.sources]
+mjlab = { git = "https://github.com/mujocolab/mjlab", rev = "c2e1e06400e309b6897a536693fe5d2aa772c5b2" }
+warp-lang = { index = "nvidia", marker = "sys_platform != 'darwin'" }
+torch = { index = "pytorch-cu128", marker = "sys_platform != 'darwin'" }
+
+[[tool.uv.index]]
+url = "https://pypi.org/simple"
+
+[[tool.uv.index]]
+name = "nvidia"
+url = "https://pypi.nvidia.com/"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/livox_mid360_mjlab"]
+
+[tool.ruff]
+line-length = 88
+indent-width = 2
+src = ["src", "demo"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
